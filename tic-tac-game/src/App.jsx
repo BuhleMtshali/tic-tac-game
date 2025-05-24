@@ -14,6 +14,21 @@ function App() {
     checkScore();
   }, [cells]);
 
+  useEffect(() => {
+    if(winningMsg){
+      startTransition();
+    }
+  }, [winningMsg]);
+
+  const handleRestartGame = () => {
+    setCells(["", "", "", "", "", "", "", "", ""]);
+    setGo("marshmallow");
+    setWinningMsg(null);
+    if(rainIntervalid){
+      clearInterval(rainIntervalid);
+      setRainIntervalid(null)
+    }
+  }
   return (
     <>
     
