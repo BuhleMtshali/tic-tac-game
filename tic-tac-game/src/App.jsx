@@ -102,6 +102,7 @@ const App = () => {
 
   return (
     <div className="app">
+      <h1>Tic Tac Toe Game 👾</h1>
       <div className="gameboard">
         {cells.map((cell, index) => (
           <Cell
