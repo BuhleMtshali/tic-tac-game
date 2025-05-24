@@ -31,6 +31,21 @@
   box-shadow: 3px 3px 0px 0px wheat inset;
 }
 
+.square > div {
+  font-size: 3rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.marshmallow::before {
+  content: "🍡";
+}
+
+.strawberry::before {
+  content: "🍓";
+}
+
+
 .message {
   font-family: 'Gill Sans';
   display: flex;

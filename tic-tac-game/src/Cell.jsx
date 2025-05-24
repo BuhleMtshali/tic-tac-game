@@ -34,13 +34,10 @@ const Cell = ({ cell, id, go, setGo, cells, setCells, winningMsg }) => {
   };
 
   return (
+     
      <div className="square" id={id} onClick={handleClick}>
-    <div className={cell}>
-      {cell === "marshmallow" && "🍡"}
-      {cell === "strawberry"  && "🍓"}
+      <div className={cell}></div>
     </div>
-  </div>
-
   );
 };
 
