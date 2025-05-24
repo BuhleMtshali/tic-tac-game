@@ -81,7 +81,7 @@ const App = () => {
     } else if (winningMsg === "Marshmallow Wins!") {
       rain.innerText = "🍡"
     } else {
-      rain.innerText = "😶"; // Default or draw condition
+      rain.innerText = "😶"; 
     }
 
     document.body.appendChild(rain);

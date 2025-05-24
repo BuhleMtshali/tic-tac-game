@@ -1,4 +1,5 @@
 import React from "react";
+import './App.css'
 
 const Cell = ({ cell, id, go, setGo, cells, setCells, winningMsg }) => {
   const handleClick = (e) => {
@@ -33,9 +34,13 @@ const Cell = ({ cell, id, go, setGo, cells, setCells, winningMsg }) => {
   };
 
   return (
-    <div className="square" id={id} onClick={handleClick}>
-      <div className={cell}></div>
+     <div className="square" id={id} onClick={handleClick}>
+    <div className={cell}>
+      {cell === "marshmallow" && "🍡"}
+      {cell === "strawberry"  && "🍓"}
     </div>
+  </div>
+
   );
 };
 
