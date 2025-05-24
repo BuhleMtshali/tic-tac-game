@@ -1,44 +1,38 @@
-import React from "react";
-import './App.css'
+import React from 'react';
+import styled from 'styled-components';
 
-const Cell = ({ cell, id, go, setGo, cells, setCells, winningMsg }) => {
-  const handleClick = (e) => {
-    if (!winningMsg) {
-      const firstChild = e.target.firstChild;
-      const taken =
-        firstChild?.classList.contains("marshmallow") ||
-        firstChild?.classList.contains("strawberry");
-      if (!taken) {
-        if (go === "marshmallow") {
-          firstChild.classList.add("marshmallow");
-          handleCellChange("marshmallow");
-          setGo("strawberry");
-        } else if (go === "strawberry") {
-          firstChild.classList.add("strawberry");
-          handleCellChange("strawberry");
-          setGo("marshmallow");
-        }
-      }
-    }
-  };
+const StyledCell = styled.div`
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: var(--cellBg, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  border: 2px solid #ccc;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
 
-  const handleCellChange = (className) => {
-    const nextCells = cells.map((cell, index) => {
-      if (index === id) {
-        return className;
-      } else {
-        return cell;
-      }
-    });
-    setCells(nextCells);
-  };
+  &:hover {
+    background-color: var(--cellHover, #f0f0f0);
+  }
+`;
+
+export default function Cell({ cell, onClick }) {
+  let symbol;
+  if (cell === 'marshmallow') {
+    symbol = '🍡';
+  } else if (cell === 'strawberry') {
+    symbol = '🍓';
+  } else {
+    symbol = '';
+  }
 
   return (
-     
-     <div className="square" id={id} onClick={handleClick}>
-      <div className={cell}></div>
-    </div>
+    <StyledCell onClick={onClick}>
+      {symbol}
+    </StyledCell>
   );
-};
-
-export default Cell;
+}
