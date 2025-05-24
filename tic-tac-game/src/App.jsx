@@ -3,32 +3,33 @@ import Restart from "./assets/refresh.png";
 import Cell from './Cell';
 import './App.css'
 
-function App() {
+const App = () => {
   const [cells, setCells] = useState(["", "", "", "", "", "", "", "", ""]);
   const [go, setGo] = useState("marshmallow");
   const [winningMsg, setWinningMsg] = useState(null);
-  const [rainIntervalid, setRainIntervalid] = useState(null);
-  const message = "it is now" + go + "'s go.";
+  const [rainIntervalId, setRainIntervalId] = useState(null);
 
-  useState(() => {
+  const message = "it is now " + go + "'s go.";
+
+  useEffect(() => {
     checkScore();
   }, [cells]);
 
   useEffect(() => {
-    if(winningMsg){
-      startTransition();
+    if(winningMsg) {
+      startRain();
     }
-  }, [winningMsg]);
+  }, [winningMsg])
 
   const handleRestartGame = () => {
     setCells(["", "", "", "", "", "", "", "", ""]);
     setGo("marshmallow");
     setWinningMsg(null);
-    if(rainIntervalid){
-      clearInterval(rainIntervalid);
-      setRainIntervalid(null)
+    if (rainIntervalId) {
+      clearInterval(rainIntervalId);
+      setRainIntervalId(null);
     }
-  }
+  };
 
   const checkScore = () => {
     const winningCombos = [
@@ -39,38 +40,37 @@ function App() {
       [1, 4, 7],
       [2, 5, 8],
       [0, 4, 8],
-      [2, 4, 6]
+      [2, 4, 6],
     ];
 
-    let winnwerFound = false;
+    let winnerFound = false;
 
     winningCombos.forEach((array) => {
       let marshmallowWins = array.every(
         (cell) => cells[cell] === "marshmallow"
       );
-      if(marshmallowWins){
+      if (marshmallowWins) {
         setWinningMsg("Marshmallow Wins!");
-        winnwerFound = true;
-        return
+        winnerFound = true;
+        return;
       }
     });
 
     winningCombos.forEach((array) => {
-      let strawberryWins = array.every((cell) => cells[cell] === "strawberry");
-      if(strawberryWins){
-        setWinningMsg(strawberryWins)
-          setWinningMsg("Strawberry Wins");
-          winnwerFound = true;
-          return
+      let strawberrywWins = array.every((cell) => cells[cell] === "strawberry");
+      if (strawberrywWins) {
+        setWinningMsg("Strawberry Wins!");
+        winnerFound = true;
+        return;
       }
     });
 
-    if (!winnwerFound && cells.every((cell) => cell !== "")) {
+    if (!winnerFound && cells.every((cell) => cell !== "")) {
       setWinningMsg("It's a Draw!");
     }
-  }
+  };
 
-   const makeRain = () => {
+  const makeRain = () => {
     const rain = document.createElement("div");
     rain.classList.add("makeRain");
 
@@ -93,7 +93,7 @@ function App() {
 
   const startRain = () => {
     const intervalId = setInterval(makeRain, 300);
-    setRainIntervalid(intervalId);
+    setRainIntervalId(intervalId);
 
     setTimeout(() => {
       clearInterval(intervalId);
@@ -119,14 +119,14 @@ function App() {
       <p className="message">
         {winningMsg || message}
         <img
-          src={restart}
+          src={Restart}
           className="restartIcon"
           alt="restart"
           onClick={handleRestartGame}
         />
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
